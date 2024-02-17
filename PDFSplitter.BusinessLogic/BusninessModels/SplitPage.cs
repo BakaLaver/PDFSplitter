@@ -8,5 +8,6 @@ namespace PDFSplitter.BusinessLogic.BusninessModels
 {
     public class SplitPage
     {
+
     }
 }
