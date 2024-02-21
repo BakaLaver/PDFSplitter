@@ -8,5 +8,9 @@ namespace PDFSplitter.ViewModel
 {
     public class MainWindowsModel
     {
+        public MainWindowsModel() 
+        { 
+            
+        }
     }
 }

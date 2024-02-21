@@ -8,5 +8,7 @@ namespace PDFSplitter.BusinessLogic.Interfaces
 {
     public interface IPDFService
     {
+        void ExtractPageFromTo(string sourcePDFpath, string outputPDFpath, int startpage, int endpage);
+        void ExtractOnePage(string sourcePDFpath, string outputPDFpath, int page);
     }
 }
