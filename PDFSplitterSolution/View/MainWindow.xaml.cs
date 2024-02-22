@@ -1,4 +1,5 @@
 ﻿using PDFSplitter.ViewModel;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,10 +18,21 @@ namespace PDFSplitter
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainWindowsModel ViewModel { get; set; }
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowsModel();
+            ViewModel = new MainWindowsModel();
+            DataContext = ViewModel;
+        }
+
+        private void StackPanel_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) 
+            {
+                string[] file = (string[])e.Data.GetData(DataFormats.FileDrop);
+                ViewModel.FilePath = file[0];
+            }
         }
     }
 }
