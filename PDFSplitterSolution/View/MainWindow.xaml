@@ -7,9 +7,62 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="1" AllowDrop="True" Drop="StackPanel_Drop" Background="AliceBlue">
-            <Label Content="{Binding FilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        </StackPanel>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel x:Name="SplitPageDropFile" AllowDrop="True" Drop="SplitPageDropFile_Drop" Background="Azure">
+                <Grid Grid.Row="0">
+                    <Label Grid.Row="0" Grid.Column="0" FontWeight="Bold" Content="Вытащить страницы, от и до" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Файл" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding FromToModel.InPutPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="..." Grid.Row="0" Grid.Column="2"/>
+                </Grid>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="Сохронить в папку" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Grid.Column="1"/>
+                    <Button Content="..." Grid.Row="0" Grid.Column="2"/>
+                </Grid>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="190"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="От" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBox Grid.Row="0" TextAlignment="Center" Grid.Column="1"/>
+                </Grid>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="190"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="До" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBox Grid.Row="0" TextAlignment="Center" Grid.Column="1"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PDFSplitter.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -9,28 +10,14 @@ using System.Threading.Tasks;
 
 namespace PDFSplitter.ViewModel
 {
-    public class MainWindowsModel : INotifyPropertyChanged
+    public class MainWindowsModel 
     {
-        private string _filePath;
-        public string FilePath 
-        {
-            get { return _filePath; }
-            set
-            {
-                _filePath = value;
-                OnPropertyChanged("FilePath");
-            }
-        }
+        public SplitPDFFromTo FromToModel {  get; set; }
         public MainWindowsModel() 
         {
-
+            FromToModel = new SplitPDFFromTo();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
+       
     }
 }

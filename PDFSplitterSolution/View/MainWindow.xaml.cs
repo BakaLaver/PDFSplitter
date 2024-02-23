@@ -26,12 +26,12 @@ namespace PDFSplitter
             DataContext = ViewModel;
         }
 
-        private void StackPanel_Drop(object sender, DragEventArgs e)
+        private void SplitPageDropFile_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) 
             {
                 string[] file = (string[])e.Data.GetData(DataFormats.FileDrop);
-                ViewModel.FilePath = file[0];
+                ViewModel.FromToModel.InPutPath = file[0];
             }
         }
     }
