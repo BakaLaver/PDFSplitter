@@ -13,7 +13,39 @@ namespace PDFSplitter.Model
     {
         private string _inPutPath;
         private string _outPutPath;
+        private string _newDocumentName;
+        private int _from;
+        private int _to;
 
+        public int From 
+        {
+            get { return _from; }
+            set 
+            { 
+                _from = value;
+                OnPropertyChanged("From");
+            }
+        }
+
+        public int To 
+        {
+            get { return _to; }
+            set 
+            {
+                _to = value;
+                OnPropertyChanged("To");
+            }
+        }
+
+        public string NewDocumentName 
+        {
+            get { return _newDocumentName; } 
+            set 
+            {
+                _newDocumentName = value;
+                OnPropertyChanged("NewDocumentName");
+            }
+        }
         public string InPutPath 
         {
             get { return _inPutPath; } 

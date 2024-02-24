@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PDFSplitter.InterfaceForModel
 {
-    interface IModelProfile
+     public interface IModelProfile
     {
         string InPutPath { get; set; }
         string OutPutPath { get; set; }

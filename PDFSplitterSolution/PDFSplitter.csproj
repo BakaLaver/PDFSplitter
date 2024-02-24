@@ -12,4 +12,8 @@
     <PackageReference Include="AdonisUI" Version="1.17.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PDFSplitter.BusinessLogic\PDFSplitter.BusinessLogic.csproj" />
+  </ItemGroup>
+
 </Project>
