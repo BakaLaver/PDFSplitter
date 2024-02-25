@@ -17,58 +17,63 @@ namespace PDFSplitter.ViewModel
 {
     public class MainWindowsModel 
     {
-        private RelayCommand _selectInFileCommand;
-        private RelayCommand _selectOutFileCommand;
-        private RelayCommand _takePageFromToCommand;
-        public SplitPDFFromTo FromToModel {  get; set; }
 
-        private PDFService FromToService { get; set; }
+        private PDFService TakePagesService { get; set; }
+        
+        public TakeOnePage OnePageModel { get; set; }
 
         public MainWindowsModel() 
         {
             FromToModel = new SplitPDFFromTo();
-            FromToService = new PDFService();
+            TakePagesService = new PDFService();
+            OnePageModel = new TakeOnePage();
         }
 
-        public RelayCommand SelectInFileCommand
+        private void FromToCall()
+        {
+            string outPath = FromToModel.OutPutPath + @"\" + FromToModel.NewDocumentName + ".pdf";
+            TakePagesService.ExtractPageFromTo(FromToModel.InPutPath, outPath, FromToModel.From, FromToModel.To);
+        }
+
+        #region FromToModel
+        private RelayCommand _selectFromToInFileCommand;
+        private RelayCommand _selectFromToOutFileCommand;
+        private RelayCommand _takePagesFromToCommand;
+        public SplitPDFFromTo FromToModel {  get; set; }
+
+        public RelayCommand SelectFromToInFileCommand
         {
             get
             {
-                return _selectInFileCommand ??
-                  (_selectInFileCommand = new RelayCommand(obj =>
+                return _selectFromToInFileCommand ??
+                  (_selectFromToInFileCommand = new RelayCommand(obj =>
                   {
                       FromToModel.InPutPath = SelectSourceFile();
                   }));
             }
         }
-        public RelayCommand SelectOutFileCommand
+        public RelayCommand SelectFromToOutFileCommand
         {
             get
             {
-                return _selectOutFileCommand ??
-                  (_selectOutFileCommand = new RelayCommand(obj =>
+                return _selectFromToOutFileCommand ??
+                  (_selectFromToOutFileCommand = new RelayCommand(obj =>
                   {
                       FromToModel.OutPutPath = SelectOutFlder();
                   }));
             }
         }
 
-        public RelayCommand TakePageFromToCommand
+        public RelayCommand TakePagesFromToCommand
         {
             get
             {
-                return _takePageFromToCommand ??
-                  (_takePageFromToCommand = new RelayCommand(obj =>
+                return _takePagesFromToCommand ??
+                  (_takePagesFromToCommand = new RelayCommand(obj =>
                   {
                       FromToCall();
                   }));
             }
-        }
-
-        private void FromToCall() 
-        {
-            string outPath = FromToModel.OutPutPath + @"\" + FromToModel.NewDocumentName + ".pdf";
-            FromToService.ExtractPageFromTo(FromToModel.InPutPath, outPath, FromToModel.From, FromToModel.To);
         }
 
         private string SelectSourceFile()
@@ -93,6 +98,8 @@ namespace PDFSplitter.ViewModel
             CommonFileDialogResult result = dialog.ShowDialog();
             return dialog.FileName;
         }
+        #endregion 
+
 
     }
 }
