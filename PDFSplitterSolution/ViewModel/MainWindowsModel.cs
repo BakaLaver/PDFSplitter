@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using PDFSplitter.BusinessLogic.Services;
 using PDFSplitter.Model;
 using PDFSplitter.ViewModel.Command;
@@ -36,7 +37,7 @@ namespace PDFSplitter.ViewModel
                 return _selectInFileCommand ??
                   (_selectInFileCommand = new RelayCommand(obj =>
                   {
-                      FromToModel.InPutPath = ExecuteOpemFile();
+                      FromToModel.InPutPath = SelectSourceFile();
                   }));
             }
         }
@@ -47,7 +48,7 @@ namespace PDFSplitter.ViewModel
                 return _selectOutFileCommand ??
                   (_selectOutFileCommand = new RelayCommand(obj =>
                   {
-                      FromToModel.OutPutPath = (string)ExecuteOpemFile();
+                      FromToModel.OutPutPath = SelectOutFlder();
                   }));
             }
         }
@@ -59,12 +60,18 @@ namespace PDFSplitter.ViewModel
                 return _takePageFromToCommand ??
                   (_takePageFromToCommand = new RelayCommand(obj =>
                   {
-                      FromToService.ExtractPageFromTo(FromToModel.InPutPath, FromToModel.OutPutPath + @"\" + FromToModel.NewDocumentName + ".pdf", FromToModel.From, FromToModel.To);
+                      FromToCall();
                   }));
             }
         }
 
-        private string ExecuteOpemFile()
+        private void FromToCall() 
+        {
+            string outPath = FromToModel.OutPutPath + @"\" + FromToModel.NewDocumentName + ".pdf";
+            FromToService.ExtractPageFromTo(FromToModel.InPutPath, outPath, FromToModel.From, FromToModel.To);
+        }
+
+        private string SelectSourceFile()
         {
             string path = "" ;
             OpenFileDialog op = new OpenFileDialog();
@@ -78,6 +85,14 @@ namespace PDFSplitter.ViewModel
             return path;
         }
 
+
+        private string SelectOutFlder() 
+        {
+            var dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+            CommonFileDialogResult result = dialog.ShowDialog();
+            return dialog.FileName;
+        }
 
     }
 }

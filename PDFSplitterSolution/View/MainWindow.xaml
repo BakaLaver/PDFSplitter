@@ -31,7 +31,7 @@
                         <ColumnDefinition Width="20"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" Content="Файл" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding FromToModel.InPutPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="0" IsEnabled="False" Grid.Column="1" Text="{Binding FromToModel.InPutPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     <Button Content="..." Command="{Binding SelectInFileCommand}" Grid.Row="0" Grid.Column="2"/>
                 </Grid>
                 <Grid Grid.Row="0">
@@ -40,7 +40,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" Content="Имя нового файла" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding FromToModel.NewDocumentName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="0" Name="NewFileName" Grid.Column="1" Text="{Binding FromToModel.NewDocumentName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NewFileName_PreviewTextInput"/>
                 </Grid>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
@@ -49,7 +49,7 @@
                         <ColumnDefinition Width="20"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" Content="Сохронить в папку" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="0" Text ="{Binding FromToModel.OutPutPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1"/>
+                    <TextBox Grid.Row="0" IsEnabled="False" Text ="{Binding FromToModel.OutPutPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1"/>
                     <Button Content="..." Command="{Binding SelectOutFileCommand}" Grid.Row="0" Grid.Column="2"/>
                 </Grid>
                 <Grid Grid.Row="0">
@@ -59,7 +59,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" Content="От" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="0" Text="{Binding FromToModel.From, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Grid.Column="1"/>
+                    <TextBox Grid.Row="0" Name="From" Text="{Binding FromToModel.From, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Grid.Column="1" PreviewTextInput="From_PreviewTextInput"/>
                 </Grid>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
@@ -68,7 +68,7 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" Content="До" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="0" Text="{Binding FromToModel.To, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Grid.Column="1"/>
+                    <TextBox Grid.Row="0" Name="To" Text="{Binding FromToModel.To, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Grid.Column="1" PreviewTextInput="To_PreviewTextInput"/>
                 </Grid>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
