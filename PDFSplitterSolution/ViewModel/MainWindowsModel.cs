@@ -1,9 +1,9 @@
-﻿using Microsoft.Win32;
+﻿using FileSelection = Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using PDFSplitter.BusinessLogic.Services;
 using PDFSplitter.Model;
 using PDFSplitter.ViewModel.Command;
-using System;
+//using System.Windows.Forms;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -12,6 +12,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using PDFSplitter.InterfaceForModel;
+using System.Windows;
 
 namespace PDFSplitter.ViewModel
 {
@@ -29,11 +31,10 @@ namespace PDFSplitter.ViewModel
         }
 
         #region OnePageModel
-        public TakeOnePage OnePageModel { get; set; }
-
         private RelayCommand _selectOnePageInFileCommand;
         private RelayCommand _selectOnePageOutFileCommand;
         private RelayCommand _takeOnePageCommand;
+        public TakeOnePage OnePageModel { get; set; }
 
         public RelayCommand SelectOnePageInFileCommand
         {
@@ -66,6 +67,7 @@ namespace PDFSplitter.ViewModel
                   (_takeOnePageCommand = new RelayCommand(obj =>
                   {
                       OnePageCall();
+                      OpenFolerQuestion(OnePageModel.OutPutPath, OnePageModel);
                   }));
             }
         }
@@ -120,15 +122,32 @@ namespace PDFSplitter.ViewModel
                   (_takePagesFromToCommand = new RelayCommand(obj =>
                   {
                       FromToCall();
+                      OpenFolerQuestion(OnePageModel.OutPutPath, FromToModel);
                   }));
             }
         }
 
         #endregion 
+
+        private void OpenFolerQuestion(string path, IModelProfile profile) 
+        {
+            var dialogResult = MessageBox.Show("Открыть папку с документом?", "Готово!", MessageBoxButton.YesNo);
+            string fullName = profile.NewDocumentName + ".pdf";
+            string fullPath = path + @"\" + fullName;
+            if (dialogResult == MessageBoxResult.Yes)
+            {
+                fullPath = System.IO.Path.GetFullPath(fullPath);
+                System.Diagnostics.Process.Start("explorer.exe", string.Format("/select,\"{0}\"", fullPath));
+            }
+            else if (dialogResult == MessageBoxResult.No)
+            {
+                
+            }
+        }
         private string SelectSourceFile()
         {
             string path = "" ;
-            OpenFileDialog op = new OpenFileDialog();
+            FileSelection.OpenFileDialog op = new FileSelection.OpenFileDialog();
             op.Filter = "PDFfile|*.pdf";
             op.DefaultExt = "pdf";
 

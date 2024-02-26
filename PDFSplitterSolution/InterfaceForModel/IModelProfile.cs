@@ -10,5 +10,6 @@ namespace PDFSplitter.InterfaceForModel
     {
         string InPutPath { get; set; }
         string OutPutPath { get; set; }
+        public string NewDocumentName { get; set; }
     }
 }

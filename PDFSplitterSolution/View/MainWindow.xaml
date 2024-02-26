@@ -79,9 +79,9 @@
                     <Button Content="Извлечь" Command="{Binding TakePagesFromToCommand}" Grid.Row="0" Grid.Column="2"/>
                 </Grid>
             </StackPanel>
-            
-        <Grid  Grid.Column="1">
-            <StackPanel x:Name="TakeOnePageDropFile" AllowDrop="True" Drop="TakeOnePageDropFile_Drop" Background="BlanchedAlmond">
+
+            <Grid  Grid.Column="1">
+                <StackPanel x:Name="TakeOnePageDropFile" AllowDrop="True" Drop="TakeOnePageDropFile_Drop" Background="BlanchedAlmond">
                     <Grid Grid.Row="0">
                         <Label Grid.Row="0" Grid.Column="0" FontWeight="Bold" Content="Вытащить одну страницу" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
@@ -130,8 +130,13 @@
                         </Grid.ColumnDefinitions>
                         <Button Content="Извлечь" Command="{Binding TakeOnePageCommand}" Grid.Row="0" Grid.Column="2"/>
                     </Grid>
-                </StackPanel>        
+                </StackPanel>
+            </Grid>
         </Grid>
-        </Grid>
+            <StackPanel Grid.Row="1"  Drop="TakeOnePageDropFile_Drop" Background="Lavender">
+            <Grid Grid.Row="0">
+                <Label Grid.Row="0" Grid.Column="0" FontWeight="Bold" Content="Объединение документов (в разработке)" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>
