@@ -50,7 +50,7 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" Content="Сохронить в папку" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <TextBox Grid.Row="0" IsEnabled="False" Text ="{Binding FromToModel.OutPutPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1"/>
-                    <Button Content="..." Command="{Binding SelectOutFileCommand}" Grid.Row="0" Grid.Column="2"/>
+                    <Button Content="..." Command="{Binding SelectFromToOutFileCommand}" Grid.Row="0" Grid.Column="2"/>
                 </Grid>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
@@ -76,7 +76,7 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Content="Извлечь" Command="{Binding TakePageFromToCommand}" Grid.Row="0" Grid.Column="2"/>
+                    <Button Content="Извлечь" Command="{Binding TakePagesFromToCommand}" Grid.Row="0" Grid.Column="2"/>
                 </Grid>
             </StackPanel>
             
@@ -93,7 +93,7 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Row="0" Grid.Column="0" Content="Файл" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBox Grid.Row="0" IsEnabled="False" Grid.Column="1" Text="{Binding OnePageModel.InPutPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Button Content="..." Command="{Binding SelectInFileCommand}" Grid.Row="0" Grid.Column="2"/>
+                        <Button Content="..." Command="{Binding SelectOnePageInFileCommand}" Grid.Row="0" Grid.Column="2"/>
                     </Grid>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -110,8 +110,8 @@
                             <ColumnDefinition Width="20"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Row="0" Grid.Column="0" Content="Сохронить в папку" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="0" IsEnabled="False" Text ="{Binding FromToModel.OutPutPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1"/>
-                        <Button Content="..." Command="{Binding SelectOutFileCommand}" Grid.Row="0" Grid.Column="2"/>
+                        <TextBox Grid.Row="0" IsEnabled="False" Text ="{Binding OnePageModel.OutPutPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1"/>
+                        <Button Content="..." Command="{Binding SelectOnePageOutFileCommand}" Grid.Row="0" Grid.Column="2"/>
                     </Grid>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -120,7 +120,7 @@
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Row="0" Grid.Column="0" Content="Номер страницы" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="0" Name="PageNumber" Text="{Binding FromToModel.From, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Grid.Column="1" PreviewTextInput="PageNumber_PreviewTextInput"/>
+                        <TextBox Grid.Row="0" Name="PageNumber" Text="{Binding OnePageModel.NumberOfPage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Grid.Column="1" PreviewTextInput="PageNumber_PreviewTextInput"/>
                     </Grid>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -128,7 +128,7 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Content="Извлечь" Command="{Binding TakePagesFromToCommand}" Grid.Row="0" Grid.Column="2"/>
+                        <Button Content="Извлечь" Command="{Binding TakeOnePageCommand}" Grid.Row="0" Grid.Column="2"/>
                     </Grid>
                 </StackPanel>        
         </Grid>

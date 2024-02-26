@@ -82,7 +82,7 @@ namespace PDFSplitter
                 string[] file = (string[])e.Data.GetData(DataFormats.FileDrop);
                 if (CheckDropedFile(file[0]))
                 {
-                    ViewModel.FromToModel.InPutPath = file[0];
+                    ViewModel.OnePageModel.InPutPath = file[0];
                 }
                 else
                 {
