@@ -139,10 +139,6 @@ namespace PDFSplitter.ViewModel
                 fullPath = System.IO.Path.GetFullPath(fullPath);
                 System.Diagnostics.Process.Start("explorer.exe", string.Format("/select,\"{0}\"", fullPath));
             }
-            else if (dialogResult == MessageBoxResult.No)
-            {
-                
-            }
         }
         private string SelectSourceFile()
         {
