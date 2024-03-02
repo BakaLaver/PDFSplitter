@@ -54,7 +54,7 @@ namespace PDFSplitter.ViewModel
                 return _selectOnePageOutFileCommand ??
                   (_selectOnePageOutFileCommand = new RelayCommand(obj =>
                   {
-                      OnePageModel.OutPutPath = SelectOutFlder();
+                      SelectOutFlder(OnePageModel);
                   }));
             }
         }
@@ -109,7 +109,7 @@ namespace PDFSplitter.ViewModel
                 return _selectFromToOutFileCommand ??
                   (_selectFromToOutFileCommand = new RelayCommand(obj =>
                   {
-                      FromToModel.OutPutPath = SelectOutFlder();
+                      SelectOutFlder(FromToModel);
                   }));
             }
         }
@@ -155,12 +155,15 @@ namespace PDFSplitter.ViewModel
         }
 
 
-        private string SelectOutFlder() 
+        private void SelectOutFlder(IModelProfile profile) 
         {
             var dialog = new CommonOpenFileDialog();
             dialog.IsFolderPicker = true;
             CommonFileDialogResult result = dialog.ShowDialog();
-            return dialog.FileName;
+            if (result == CommonFileDialogResult.Ok) 
+            {
+                profile.OutPutPath = dialog.FileName;
+            }
         }
 
 
