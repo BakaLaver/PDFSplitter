@@ -32,7 +32,7 @@
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="0" Content="Файл" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <TextBox Grid.Row="0" IsEnabled="False" Grid.Column="1" Text="{Binding FromToModel.InPutPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Button Content="..." Command="{Binding SelectInFileCommand}" Grid.Row="0" Grid.Column="2"/>
+                    <Button Content="..." Command="{Binding SelectFromToInFileCommand}" Grid.Row="0" Grid.Column="2"/>
                 </Grid>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
