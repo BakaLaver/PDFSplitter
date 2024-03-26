@@ -15,60 +15,69 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel x:Name="SplitPageDropFile" AllowDrop="True" Drop="SplitPageDropFile_Drop" Background="Azure">
                 <Grid Grid.Row="0">
-                    <Label Grid.Row="0" Grid.Column="0" FontWeight="Bold" Content="Вытащить страницы, от и до" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Label Grid.Row="0" Grid.Column="0" FontWeight="Bold" Content="Вытащить страницы (страницу)" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Content="Файл" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="0" IsEnabled="False" Grid.Column="1" Text="{Binding FromToModel.InPutPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Button Content="..." Command="{Binding SelectFromToInFileCommand}" Grid.Row="0" Grid.Column="2"/>
+                    <Label Grid.Row="0" Grid.Column="1" Content="Файл" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBox Grid.Row="0" IsEnabled="False" Grid.Column="2" Text="{Binding FromToModel.InPutPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="..." Command="{Binding SelectFromToInFileCommand}" Grid.Row="0" Grid.Column="3"/>
                 </Grid>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Content="Имя нового файла" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="0" Name="NewFileName" Grid.Column="1" Text="{Binding FromToModel.NewDocumentName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NewFileName_PreviewTextInput"/>
+                    <Label Grid.Row="0" Grid.Column="1" Content="Имя нового файла" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Name="NewFileName" Grid.Column="2" Text="{Binding FromToModel.NewDocumentName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NewFileName_PreviewTextInput"/>
                 </Grid>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Content="Сохронить в папку" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="0" IsEnabled="False" Text ="{Binding FromToModel.OutPutPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1"/>
-                    <Button Content="..." Command="{Binding SelectFromToOutFileCommand}" Grid.Row="0" Grid.Column="2"/>
+                    <Label Grid.Row="0" Grid.Column="1" Content="Сохронить в папку" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBox Grid.Row="0" IsEnabled="False" Text ="{Binding FromToModel.OutPutPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="2"/>
+                    <Button Content="..." Command="{Binding SelectFromToOutFileCommand}" Grid.Row="0" Grid.Column="3"/>
                 </Grid>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="190"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Content="От" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="0" Name="From" Text="{Binding FromToModel.From, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Grid.Column="1" PreviewTextInput="From_PreviewTextInput"/>
+                    <Label Grid.Row="0" Grid.Column="1" Content="От" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Name="From" Text="{Binding FromToModel.From, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Grid.Column="2" PreviewTextInput="From_PreviewTextInput"/>
                 </Grid>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="190"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Content="До" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBox Grid.Row="0" Name="To" Text="{Binding FromToModel.To, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Grid.Column="1" PreviewTextInput="To_PreviewTextInput"/>
+                    <Label Grid.Row="0" Grid.Column="1" Content="До" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Name="To" Text="{Binding FromToModel.To, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Grid.Column="2" PreviewTextInput="To_PreviewTextInput"/>
                 </Grid>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
@@ -79,61 +88,8 @@
                     <Button Content="Извлечь" Command="{Binding TakePagesFromToCommand}" Grid.Row="0" Grid.Column="2"/>
                 </Grid>
             </StackPanel>
-
-            <Grid  Grid.Column="1">
-                <StackPanel x:Name="TakeOnePageDropFile" AllowDrop="True" Drop="TakeOnePageDropFile_Drop" Background="BlanchedAlmond">
-                    <Grid Grid.Row="0">
-                        <Label Grid.Row="0" Grid.Column="0" FontWeight="Bold" Content="Вытащить одну страницу" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </Grid>
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="20"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Content="Файл" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="0" IsEnabled="False" Grid.Column="1" Text="{Binding OnePageModel.InPutPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Button Content="..." Command="{Binding SelectOnePageInFileCommand}" Grid.Row="0" Grid.Column="2"/>
-                    </Grid>
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Content="Имя нового файла" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="0" Name="NewFileOnePageName" Grid.Column="1" Text="{Binding OnePageModel.NewDocumentName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NewFileOnePageName_PreviewTextInput"/>
-                    </Grid>
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="20"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Content="Сохронить в папку" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="0" IsEnabled="False" Text ="{Binding OnePageModel.OutPutPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1"/>
-                        <Button Content="..." Command="{Binding SelectOnePageOutFileCommand}" Grid.Row="0" Grid.Column="2"/>
-                    </Grid>
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="190"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Content="Номер страницы" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Row="0" Name="PageNumber" Text="{Binding OnePageModel.NumberOfPage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center" Grid.Column="1" PreviewTextInput="PageNumber_PreviewTextInput"/>
-                    </Grid>
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="190"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Button Content="Извлечь" Command="{Binding TakeOnePageCommand}" Grid.Row="0" Grid.Column="2"/>
-                    </Grid>
-                </StackPanel>
-            </Grid>
         </Grid>
-            <StackPanel Grid.Row="1"  Drop="TakeOnePageDropFile_Drop" Background="Lavender">
+            <StackPanel Grid.Row="1" Background="Lavender">
             <Grid Grid.Row="0">
                 <Label Grid.Row="0" Grid.Column="0" FontWeight="Bold" Content="Объединение документов (в разработке)" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>

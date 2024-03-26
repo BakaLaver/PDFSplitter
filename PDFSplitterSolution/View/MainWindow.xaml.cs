@@ -75,22 +75,6 @@ namespace PDFSplitter
 
         #endregion
 
-        private void TakeOnePageDropFile_Drop(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                string[] file = (string[])e.Data.GetData(DataFormats.FileDrop);
-                if (CheckDropedFile(file[0]))
-                {
-                    ViewModel.OnePageModel.InPutPath = file[0];
-                }
-                else
-                {
-                    MessageBox.Show("Допустимы только PDF файлы");
-                }
-            }
-        }
-
         private void NewFileOnePageName_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = Regex.IsMatch(e.Text, "[.]+");

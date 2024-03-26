@@ -27,58 +27,7 @@ namespace PDFSplitter.ViewModel
         {
             FromToModel = new SplitPDFFromTo();
             TakePagesService = new PDFService();
-            OnePageModel = new TakeOnePage();
         }
-
-        #region OnePageModel
-        private RelayCommand _selectOnePageInFileCommand;
-        private RelayCommand _selectOnePageOutFileCommand;
-        private RelayCommand _takeOnePageCommand;
-        public TakeOnePage OnePageModel { get; set; }
-
-        public RelayCommand SelectOnePageInFileCommand
-        {
-            get
-            {
-                return _selectOnePageInFileCommand ??
-                  (_selectOnePageInFileCommand = new RelayCommand(obj =>
-                  {
-                      OnePageModel.InPutPath = SelectSourceFile();
-                  }));
-            }
-        }
-        public RelayCommand SelectOnePageOutFileCommand
-        {
-            get
-            {
-                return _selectOnePageOutFileCommand ??
-                  (_selectOnePageOutFileCommand = new RelayCommand(obj =>
-                  {
-                      SelectOutFlder(OnePageModel);
-                  }));
-            }
-        }
-
-        public RelayCommand TakeOnePageCommand
-        {
-            get
-            {
-                return _takeOnePageCommand ??
-                  (_takeOnePageCommand = new RelayCommand(obj =>
-                  {
-                      OnePageCall();
-                      OpenFolerQuestion(OnePageModel.OutPutPath, OnePageModel);
-                  }));
-            }
-        }
-
-        private void OnePageCall()
-        {
-            string outPath = OnePageModel.OutPutPath + @"\" + OnePageModel.NewDocumentName + ".pdf";
-            TakePagesService.ExtractOnePage(OnePageModel.InPutPath, outPath, OnePageModel.NumberOfPage);
-        }
-
-        #endregion
 
         #region FromToModel
         private RelayCommand _selectFromToInFileCommand;
@@ -122,7 +71,7 @@ namespace PDFSplitter.ViewModel
                   (_takePagesFromToCommand = new RelayCommand(obj =>
                   {
                       FromToCall();
-                      OpenFolerQuestion(OnePageModel.OutPutPath, FromToModel);
+                      OpenFolerQuestion(FromToModel.OutPutPath, FromToModel);
                   }));
             }
         }
