@@ -1,5 +1,6 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
+using System.Reflection.PortableExecutable;
 
 namespace PDFSplitter.BusinessLogic.BusninessModels
 {
@@ -29,7 +30,6 @@ namespace PDFSplitter.BusinessLogic.BusninessModels
             reader = new PdfReader(sourcePDFpath);
             sourceDocument = new Document(reader.GetPageSizeWithRotation(startpage));
             pdfCopyProvider = new PdfCopy(sourceDocument, new System.IO.FileStream(outputPDFpath, System.IO.FileMode.Create));
-
             sourceDocument.Open();
 
             for (int i = startpage; i <= endpage; i++)
