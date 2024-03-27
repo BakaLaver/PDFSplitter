@@ -21,12 +21,15 @@ namespace PDFSplitter.ViewModel
     {
 
         private PDFService TakePagesService { get; set; }
+        private PDFMergeService MergeService { get; set; }
+
 
 
         public MainWindowsModel() 
         {
             FromToModel = new SplitPDFFromTo();
             TakePagesService = new PDFService();
+            MergeService = new PDFMergeService();
         }
 
         #region FromToModel
@@ -58,7 +61,7 @@ namespace PDFSplitter.ViewModel
                 return _selectFromToOutFileCommand ??
                   (_selectFromToOutFileCommand = new RelayCommand(obj =>
                   {
-                      SelectOutFlder(FromToModel);
+                      FromToModel.OutPutPath = SelectOutFlder();
                   }));
             }
         }
@@ -76,7 +79,74 @@ namespace PDFSplitter.ViewModel
             }
         }
 
-        #endregion 
+        #endregion
+
+        #region MergeFileModel
+        private RelayCommand _selectFirstFileCommand;
+        private RelayCommand _selectSecondFileCommand;
+        private RelayCommand _outPutFolderCommand;
+        private RelayCommand _mergeFilesCommand;
+        public MergePDF MergePDFModel { get; set; }
+
+        public RelayCommand SelectFirstFileCommand
+        {
+            get
+            {
+                return _selectFirstFileCommand ??
+                  (_selectFirstFileCommand = new RelayCommand(obj =>
+                  {
+                      MergePDFModel.Document1Path = SelectSourceFile();
+                  }));
+            }
+        }
+
+        public RelayCommand SelectSecondFileCommand
+        {
+            get
+            {
+                return _selectSecondFileCommand ??
+                  (_selectSecondFileCommand = new RelayCommand(obj =>
+                  {
+                      MergePDFModel.Document2Path = SelectSourceFile();
+                  }));
+            }
+        }
+
+        public RelayCommand OutPutFolderCommand
+        {
+            get
+            {
+                return _outPutFolderCommand ??
+                  (_outPutFolderCommand = new RelayCommand(obj =>
+                  {
+                      MergePDFModel.OutPutPath = SelectSourceFile();
+                  }));
+            }
+        }
+
+        public RelayCommand MergeFilesCommand
+        {
+            get
+            {
+                return _mergeFilesCommand ??
+                  (_mergeFilesCommand = new RelayCommand(obj =>
+                  {
+                      MergeService.MergePDF(MakePathToArray(MergePDFModel.Document1Path, MergePDFModel.Document2Path), MergePDFModel.OutPutPath);
+                  }));
+            }
+        }
+
+        private List<string> MakePathToArray(string firstDoc, string secondDoc) 
+        {
+            List<string> pathArray = new List<string>();
+            pathArray.Add(firstDoc);
+            pathArray.Add(secondDoc);
+            return pathArray;
+        }
+
+
+
+        #endregion
 
         private void OpenFolerQuestion(string path, IModelProfile profile) 
         {
@@ -104,15 +174,17 @@ namespace PDFSplitter.ViewModel
         }
 
 
-        private void SelectOutFlder(IModelProfile profile) 
+        private string SelectOutFlder() 
         {
+            string path = "";
             var dialog = new CommonOpenFileDialog();
             dialog.IsFolderPicker = true;
             CommonFileDialogResult result = dialog.ShowDialog();
             if (result == CommonFileDialogResult.Ok) 
             {
-                profile.OutPutPath = dialog.FileName;
+                path = dialog.FileName;
             }
+            return path;
         }
 
 

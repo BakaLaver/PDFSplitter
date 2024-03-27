@@ -17,7 +17,7 @@ namespace PDFSplitter.BusinessLogic.BusninessModels
         private PdfDocument PdfDocument { get; set; }
 
 
-        public void CombineMultiplePDFs(string[] fileNames, string outFile)
+        public void CombineMultiplePDFs(List<string> fileNames, string outFile)
         {
             // step 1: creation of a document-object
             document = new Document();
