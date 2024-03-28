@@ -73,6 +73,8 @@ namespace PDFSplitter
             e.Handled = Regex.IsMatch(e.Text, "[.]+");
         }
 
+
+
         #endregion
 
         private void NewFileOnePageName_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -83,6 +85,11 @@ namespace PDFSplitter
         private void PageNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = Regex.IsMatch(e.Text, "[^0-9]+");
+        }
+
+        private void NewNameAfterMerge_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = Regex.IsMatch(e.Text, "[.]+");
         }
     }
 }

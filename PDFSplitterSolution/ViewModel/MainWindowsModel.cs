@@ -28,6 +28,7 @@ namespace PDFSplitter.ViewModel
         public MainWindowsModel() 
         {
             FromToModel = new SplitPDFFromTo();
+            MergePDFModel = new MergePDF();
             TakePagesService = new PDFService();
             MergeService = new PDFMergeService();
         }
@@ -74,7 +75,8 @@ namespace PDFSplitter.ViewModel
                   (_takePagesFromToCommand = new RelayCommand(obj =>
                   {
                       FromToCall();
-                      OpenFolerQuestion(FromToModel.OutPutPath, FromToModel);
+                      var fullPath = FromToModel.OutPutPath + @"\" + FromToModel.NewDocumentName + ".pdf";
+                      OpenFolerQuestion(fullPath);
                   }));
             }
         }
@@ -119,7 +121,7 @@ namespace PDFSplitter.ViewModel
                 return _outPutFolderCommand ??
                   (_outPutFolderCommand = new RelayCommand(obj =>
                   {
-                      MergePDFModel.OutPutPath = SelectSourceFile();
+                      MergePDFModel.OutPutPath = SelectOutFlder();
                   }));
             }
         }
@@ -131,7 +133,9 @@ namespace PDFSplitter.ViewModel
                 return _mergeFilesCommand ??
                   (_mergeFilesCommand = new RelayCommand(obj =>
                   {
-                      MergeService.MergePDF(MakePathToArray(MergePDFModel.Document1Path, MergePDFModel.Document2Path), MergePDFModel.OutPutPath);
+                      var fullPath = MergePDFModel.OutPutPath + @"\" + MergePDFModel.NewDocumentName + ".pdf";
+                      MergeService.MergePDF(MakePathToArray(MergePDFModel.Document1Path, MergePDFModel.Document2Path), fullPath);
+                      OpenFolerQuestion(fullPath);
                   }));
             }
         }
@@ -148,11 +152,10 @@ namespace PDFSplitter.ViewModel
 
         #endregion
 
-        private void OpenFolerQuestion(string path, IModelProfile profile) 
+        private void OpenFolerQuestion(string path) 
         {
             var dialogResult = MessageBox.Show("Открыть папку с документом?", "Готово!", MessageBoxButton.YesNo);
-            string fullName = profile.NewDocumentName + ".pdf";
-            string fullPath = path + @"\" + fullName;
+            string fullPath = path;
             if (dialogResult == MessageBoxResult.Yes)
             {
                 fullPath = System.IO.Path.GetFullPath(fullPath);
