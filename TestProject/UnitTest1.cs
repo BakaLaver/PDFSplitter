@@ -16,7 +16,7 @@ namespace TestProject
 
             string[] stringsPath = new string[] { @"F:\Downloads\PDF\teest.pdf", @"F:\Downloads\PDF\test.pdf" };
             string outPut = @"F:\Downloads\PDF\test3.pdf";
-            combineDocument.CombineMultiplePDFs(stringsPath, outPut);
+            //combineDocument.CombineMultiplePDFs(stringsPath, outPut);
         }
     }
 }
