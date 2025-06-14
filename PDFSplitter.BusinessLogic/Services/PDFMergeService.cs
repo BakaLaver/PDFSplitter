@@ -1,24 +1,53 @@
-﻿using PDFSplitter.BusinessLogic.BusninessModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using PDFSplitter.BusinessLogic.BusinessModels;
 
 namespace PDFSplitter.BusinessLogic.Services
 {
     public class PDFMergeService
     {
-        private CombineDocument _combineDocument;
+        private TextCharpField _textCharpFields { get; set; }
 
-        public PDFMergeService() 
+        public PDFMergeService(TextCharpField textCharpField)
         {
-            _combineDocument = new CombineDocument();
+            _textCharpFields = textCharpField;
         }
 
-        public void MergePDF(List<string> Paths, string outPut) 
+        public void MergePDF(List<string> fileNames, string outFile)
         {
-            _combineDocument.CombineMultiplePDFs(Paths, outPut);
+            using (FileStream newFileStream = new FileStream(outFile, FileMode.Create))
+            {
+                SetFealds(newFileStream);
+                _textCharpFields.SourceDocument.Open();
+
+                foreach (string fileName in fileNames)
+                {
+                    _textCharpFields.Reader = new PdfReader(fileName);
+                    _textCharpFields.Reader.ConsolidateNamedDestinations();
+
+                    for (int i = 1; i <= _textCharpFields.Reader.NumberOfPages; i++)
+                    {
+                        _textCharpFields.ImportedPage = _textCharpFields.PdfCopyProvider.GetImportedPage(_textCharpFields.Reader, i);
+                        _textCharpFields.PdfCopyProvider.AddPage(_textCharpFields.ImportedPage);
+                    }
+
+                    PRAcroForm form = _textCharpFields.Reader.AcroForm;
+                    if (form != null)
+                    {
+                        _textCharpFields.PdfCopyProvider.AddDocument(_textCharpFields.Reader);
+                    }
+
+                    _textCharpFields.Reader.Close();
+                }
+
+                _textCharpFields.PdfCopyProvider.Close();
+                _textCharpFields.SourceDocument.Close();
+            }
+        }
+        private void SetFealds(FileStream newFileStream)
+        {
+            _textCharpFields.SourceDocument = new Document();
+            _textCharpFields.PdfCopyProvider = new PdfCopy(_textCharpFields.SourceDocument, newFileStream);
         }
     }
 }
