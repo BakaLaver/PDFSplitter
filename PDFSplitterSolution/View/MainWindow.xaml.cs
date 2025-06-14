@@ -20,43 +20,15 @@ namespace PDFSplitter
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MainWindowsModel ViewModel { get; set; }
-        public MainWindow()
+        public MainWindow(MainWindowsModel ViewModel)
         {
             InitializeComponent();
-            ViewModel = new MainWindowsModel();
             DataContext = ViewModel;
         }
 
-        private bool CheckDropedFile(string path)
-        {
-            bool result = false;
-
-            FileInfo fileInf = new FileInfo(path);
-
-            if (fileInf.Extension == ".pdf")
-            {
-                result = true;
-            }
-            return result;
-        }
+        
 
         #region FromToLocation
-        private void SplitPageDropFile_Drop(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop)) 
-            {
-                string[] file = (string[])e.Data.GetData(DataFormats.FileDrop);
-                if (CheckDropedFile(file[0]))
-                {
-                    ViewModel.FromToModel.InPutPath = file[0];
-                }
-                else 
-                {
-                    MessageBox.Show("Допустимы только PDF файлы");
-                }
-            }
-        }
 
         private void To_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PDFSplitter.Model
 {
-    public class SplitPDFFromTo : INotifyPropertyChanged, IModelProfile
+    public class SplitPDFFromTo : INotifyPropertyChanged
     {
         private string _inPutPath;
         private string _outPutPath;

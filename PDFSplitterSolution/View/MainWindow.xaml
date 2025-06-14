@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PDFSplitter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -19,7 +19,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel x:Name="SplitPageDropFile" AllowDrop="True" Drop="SplitPageDropFile_Drop" Background="Azure">
+            <StackPanel x:Name="SplitPageDropFile" AllowDrop="True" Drop="{Binding DragAndDropToCommand}" Background="Azure">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -28,7 +28,7 @@
                         <RowDefinition />
                         <RowDefinition />
                         <RowDefinition />
-                        <RowDefinition Height="30" />
+                        <RowDefinition Height="20" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">

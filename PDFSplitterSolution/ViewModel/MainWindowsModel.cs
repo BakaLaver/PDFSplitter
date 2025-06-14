@@ -25,23 +25,63 @@ namespace PDFSplitter.ViewModel
 
 
 
-        public MainWindowsModel() 
+        public MainWindowsModel(SplitPDFFromTo fromToModel, MergePDF mergePDFModel, PDFService takePagesService, PDFMergeService mergeService) 
         {
-            FromToModel = new SplitPDFFromTo();
-            MergePDFModel = new MergePDF();
-            TakePagesService = new PDFService();
-            MergeService = new PDFMergeService();
+            FromToModel = fromToModel;
+            MergePDFModel = mergePDFModel;
+            TakePagesService = takePagesService;
+            MergeService = mergeService;
         }
 
         #region FromToModel
         private RelayCommand _selectFromToInFileCommand;
         private RelayCommand _selectFromToOutFileCommand;
         private RelayCommand _takePagesFromToCommand;
+        private RelayCommand _dragAndDropToCommand;
         public SplitPDFFromTo FromToModel {  get; set; }
         private void FromToCall()
         {
             string outPath = FromToModel.OutPutPath + @"\" + FromToModel.NewDocumentName + ".pdf";
             TakePagesService.ExtractPageFromTo(FromToModel.InPutPath, outPath, FromToModel.From, FromToModel.To);
+        }
+
+        public RelayCommand DragAndDropToCommand
+        {
+            get
+            {
+                return _dragAndDropToCommand ??
+                  (_dragAndDropToCommand = new RelayCommand(obj =>
+                  {
+                      if (obj is DragEventArgs e)
+                      {
+                          if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                          {
+                              string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                              if (files.Length > 0 && CheckDropedFile(files[0]))
+                              {
+                                  FromToModel.InPutPath = files[0];
+                              }
+                              else
+                              {
+                                  MessageBox.Show("Допустимы только PDF файлы");
+                              }
+                          }
+                      }
+                  }));
+            }
+        }
+
+        private bool CheckDropedFile(string path)
+        {
+            bool result = false;
+
+            FileInfo fileInf = new FileInfo(path);
+
+            if (fileInf.Extension == ".pdf")
+            {
+                result = true;
+            }
+            return result;
         }
 
         public RelayCommand SelectFromToInFileCommand

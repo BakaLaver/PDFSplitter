@@ -1,29 +1,39 @@
-﻿using PDFSplitter.BusinessLogic.BusninessModels;
-using PDFSplitter.BusinessLogic.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using PDFSplitter.BusinessLogic.BusinessModels;
+using System.Reflection.PortableExecutable;
 
 namespace PDFSplitter.BusinessLogic.Services
 {
-    public class PDFService:IPDFService
+    public class PDFService
     {
-        private SplitPage _SplitPageCommand;
-        public PDFService() 
+        private TextCharpField _textCharpFields { get; set; }
+
+        public PDFService(TextCharpField textCharpField) 
         {
-            _SplitPageCommand = new SplitPage();
+            _textCharpFields = textCharpField;
+        }
+        
+        public void ExtractPageFromTo(string sourcePDFpath, string outputPDFpath, int startPage, int endPage) 
+        {
+            SetFealds(sourcePDFpath, outputPDFpath, startPage);
+
+            _textCharpFields.SourceDocument.Open();
+
+            for (int i = startPage; i <= endPage; i++)
+            {
+                _textCharpFields.ImportedPage = _textCharpFields.PdfCopyProvider.GetImportedPage(_textCharpFields.Reader, i);
+                _textCharpFields.PdfCopyProvider.AddPage(_textCharpFields.ImportedPage);
+            }
+            _textCharpFields.SourceDocument.Close();
+            _textCharpFields.Reader.Close();
         }
 
-        public void ExtractPageFromTo(string sourcePDFpath, string outputPDFpath, int startpage, int endpage) 
+        private void SetFealds(string sourcePDFpath, string outputPDFpath, int startPage) 
         {
-            _SplitPageCommand.ExtractPages(sourcePDFpath, outputPDFpath, startpage, endpage);
-        }
-
-        public void ExtractOnePage(string sourcePDFpath, string outputPDFpath, int page) 
-        {
-            _SplitPageCommand.OnePageExtract(sourcePDFpath, outputPDFpath, page);
+            _textCharpFields.Reader = new PdfReader(sourcePDFpath);
+            _textCharpFields.SourceDocument = new Document(_textCharpFields.Reader.GetPageSizeWithRotation(startPage));
+            _textCharpFields.PdfCopyProvider = new PdfCopy(_textCharpFields.SourceDocument, new System.IO.FileStream(outputPDFpath, System.IO.FileMode.Create));
         }
     }
 }
