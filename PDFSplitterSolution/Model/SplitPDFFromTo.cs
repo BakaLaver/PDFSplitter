@@ -26,7 +26,6 @@ namespace PDFSplitter.Model
                 OnPropertyChanged("From");
             }
         }
-
         public int To 
         {
             get { return _to; }
@@ -36,7 +35,6 @@ namespace PDFSplitter.Model
                 OnPropertyChanged("To");
             }
         }
-
         public string NewDocumentName 
         {
             get { return _newDocumentName; } 
@@ -55,7 +53,6 @@ namespace PDFSplitter.Model
                 OnPropertyChanged("InPutPath");
             }
         }
-
         public string OutPutPath 
         {
             get { return _outPutPath; }
