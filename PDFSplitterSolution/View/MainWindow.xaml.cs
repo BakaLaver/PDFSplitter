@@ -20,10 +20,12 @@ namespace PDFSplitter
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainWindowsModel _model;
         public MainWindow(MainWindowsModel ViewModel)
         {
             InitializeComponent();
             DataContext = ViewModel;
+            _model = (MainWindowsModel)DataContext;
         }
 
         
@@ -62,6 +64,35 @@ namespace PDFSplitter
         private void NewNameAfterMerge_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = Regex.IsMatch(e.Text, "[.]+");
+        }
+
+        private void SplitPageDropFile_Drop(object sender, DragEventArgs e)
+        {
+                if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                {
+                    string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                    if (files.Length > 0 && CheckDropedFile(files[0]))
+                    {
+                        _model.FromToModel.InPutPath = files[0];
+                    }
+                    else
+                    {
+                        MessageBox.Show("Допустимы только PDF файлы");
+                    }
+                }
+        }
+
+        private bool CheckDropedFile(string path)
+        {
+            bool result = false;
+
+            FileInfo fileInf = new FileInfo(path);
+
+            if (fileInf.Extension == ".pdf")
+            {
+                result = true;
+            }
+            return result;
         }
     }
 }

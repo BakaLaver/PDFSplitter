@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PDFSplitter.BusinessLogic.BusinessModels;
+using PDFSplitter.BusinessLogic.Services;
 using PDFSplitter.Model;
 using PDFSplitter.ViewModel;
 using System.Configuration;
@@ -14,28 +16,31 @@ namespace PDFSplitter
     {
         private IServiceProvider _serviceProvider;
 
+        public App()
+        {
+            var services = new ServiceCollection();
+            ConfigureServices(services);
+            _serviceProvider = services.BuildServiceProvider();
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
-
-            // Настройка контейнера зависимостей
-            var serviceCollection = new ServiceCollection();
-            ConfigureServices(serviceCollection);
-
-            _serviceProvider = serviceCollection.BuildServiceProvider();
-
             // Создание главного окна с использованием DI
             var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
+            base.OnStartup(e);
         }
 
         private void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<MergePDF>();
-            services.AddTransient<SplitPDFFromTo>();
-
             services.AddSingleton<MainWindow>();
             services.AddSingleton<MainWindowsModel>();
+            services.AddTransient<MergePDF>();
+            services.AddTransient<SplitPDFFromTo>();
+            services.AddTransient<TextCharpField>();
+            services.AddTransient<PDFService>();
+            services.AddTransient<PDFMergeService>();
+
         }
 
     }

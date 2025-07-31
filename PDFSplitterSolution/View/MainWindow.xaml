@@ -19,7 +19,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel x:Name="SplitPageDropFile" AllowDrop="True" Drop="{Binding DragAndDropToCommand}" Background="Azure">
+            <StackPanel x:Name="SplitPageDropFile" AllowDrop="True" Drop="SplitPageDropFile_Drop" Background="Azure">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />

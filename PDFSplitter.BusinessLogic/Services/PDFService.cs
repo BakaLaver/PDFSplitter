@@ -1,7 +1,6 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
 using PDFSplitter.BusinessLogic.BusinessModels;
-using System.Reflection.PortableExecutable;
 
 namespace PDFSplitter.BusinessLogic.Services
 {
@@ -22,7 +21,8 @@ namespace PDFSplitter.BusinessLogic.Services
 
             for (int i = startPage; i <= endPage; i++)
             {
-                _textCharpFields.ImportedPage = _textCharpFields.PdfCopyProvider.GetImportedPage(_textCharpFields.Reader, i);
+                _textCharpFields.ImportedPage = _textCharpFields.PdfCopyProvider.
+                    GetImportedPage(_textCharpFields.Reader, i);
                 _textCharpFields.PdfCopyProvider.AddPage(_textCharpFields.ImportedPage);
             }
             _textCharpFields.SourceDocument.Close();
@@ -33,7 +33,8 @@ namespace PDFSplitter.BusinessLogic.Services
         {
             _textCharpFields.Reader = new PdfReader(sourcePDFpath);
             _textCharpFields.SourceDocument = new Document(_textCharpFields.Reader.GetPageSizeWithRotation(startPage));
-            _textCharpFields.PdfCopyProvider = new PdfCopy(_textCharpFields.SourceDocument, new System.IO.FileStream(outputPDFpath, System.IO.FileMode.Create));
+            _textCharpFields.PdfCopyProvider = new PdfCopy(_textCharpFields.SourceDocument, 
+                new System.IO.FileStream(outputPDFpath, System.IO.FileMode.Create));
         }
     }
 }
